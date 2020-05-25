@@ -87,7 +87,9 @@ module OmniAuth
         }
         headers = { kid: options.key_id }
 
-        ::JWT.encode(payload, private_key, 'ES256', headers)
+        jwt_token = ::JWT.encode(payload, private_key, 'ES256', headers)
+        Rails.logger.debug("omniauth-apple jwt token: #{jwt_token}")
+        jwt_token
       end
 
       def private_key
